@@ -16,13 +16,13 @@ LESSON: I should never be in charge of naming things 🙃
 
 
 ## Theory
-My target is a first person shooter game I like to play and I want to train YOLO on some objects in it to see if I can make something else fun.  
-Since the game runs on my computer at > 300fps I thought I'd want to capture around 60fps to generate images for tagging and training.  
-This turned out to be a terrible idea because there just isn't enough movement of objects at 60fps and I realized I'd probably introduce mega bias in the trained model to the non-diverse images in the set and/or I'd spend the rest of my life tagging images.  
+I have a longer-term project in the works which involves training YOLO on some objects in a first person shooter game I play.  
+The game runs on my computer at > 300fps and I thought I'd want to capture around 60fps to quickly generate images for tagging and training.  
+This turned out to be a **terrible** plan because there just isn't enough movement of objects between images when capturing at 60fps and I realized I'd probably introduce bias in the trained model to the non-diverse images in the set and/or I'd spend the rest of my life tagging images.  
 Thus, I decided it would be best to drop the fps way down and start capturing a few frames per second so that more changes per frame but I thought I'd stick with the setup that could do 60+ fps because... why not?
 
 The basic idea is that the capture class runs on it's own as BetterCam is already setup for speed. Image writing is done in another thread so it's non-blocking and pynput handles hotkey monitoring in a distinct thread as well.  
-I tried to keep things fairly SOLID, so _in theory_ I should be able to reuse the `keymon` and `snapper` classes in future work.
+I tried to keep things fairly SOLID, so _in theory_ I should be able to reuse the `keymon` and `snapper` classes in future work. 🤷
 
 ### Setup
 1. If not already done, create a virtual env: `python -m venv .venv` 
