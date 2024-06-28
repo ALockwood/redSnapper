@@ -1,7 +1,7 @@
 from pynput.keyboard import Key, Listener
 
 class KeyMon():
-    DEFAULT_EXIT_KEY = Key.pause
+    DEFAULT_EXIT_KEY = Key.f12
     DEFAULT_RUN_KEY = Key.f9
     DEFAULT_STOP_KEY = Key.f10
 
