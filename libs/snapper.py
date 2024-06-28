@@ -36,7 +36,7 @@ class Snapper():
         self.detectionBox = self.define_capture_box()
         self.saveSnap = False
 
-        self.cam = bettercam.create(device_idx=self.monitorId, output_idx=self.gpuId, output_color="BGR", max_buffer_len=512)
+        self.cam = bettercam.create(device_idx=self.monitorId, output_idx=self.gpuId, output_color="RGB", max_buffer_len=512)
         print(f"📸 Camera initialized on GPU device {self.gpuId}, output {self.monitorId}\n🖥️  Screen size: {self.HRes}x{self.VRes}\n🔍 Detection Box: {self.detectionX}x{self.detectionY} (centered)\n🎯 Target FPS: {self.target_fps}")
 
     # Starts the camera and capture
