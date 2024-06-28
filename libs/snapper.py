@@ -34,14 +34,27 @@ class Snapper():
         self.detectionX = detectionBoxWidth
         self.detectionY = detectionBoxHeight
         self.detectionBox = self.define_capture_box()
+        self.saveSnap = False
 
         self.cam = bettercam.create(device_idx=self.monitorId, output_idx=self.gpuId, output_color="BGR", max_buffer_len=512)
+        print(f"📸 Camera initialized on GPU device {self.gpuId}, output {self.monitorId}\n🖥️  Screen size: {self.HRes}x{self.VRes}\n🔍 Detection Box: {self.detectionX}x{self.detectionY} (centered)\n🎯 Target FPS: {self.target_fps}")
+
+    # Starts the camera and capture
+    def start_snapping(self):
         self.cam.start(region=self.detectionBox, target_fps=self.target_fps)
-        print("📸 Snapper initialized, capture started...")
+        self.saveSnap = True
+        print("⏺️  Capture started")
+
+    # Stops the camera and capture
+    def stop_snapping(self):
+        self.saveSnap = False
+        self.cam.stop()
+        print("⏸️  Capture stopped")
 
     # Gets the latest frame (if changed since last call) from the buffer
     def snap(self):
-        return self.cam.get_latest_frame()
+        if self.cam.is_capturing:
+            return self.cam.get_latest_frame()
 
     # Sets up the area to be captured by bettercam
     def define_capture_box(self):
@@ -85,4 +98,7 @@ class Snapper():
 
     # Clean shutdown of bettercam camera
     def Quit(self):
+        if self.cam.is_capturing:
+            self.stop_snapping()
+        
         self.cam.release
