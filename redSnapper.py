@@ -1,4 +1,5 @@
-import snapper as snap
+import libs.snapper as snp
+#import libs.keymon as km
 from PIL import Image
 import threading
 
@@ -7,7 +8,7 @@ def save_image(arr, i):
     im.save(f"test_{i}.jpeg")
 
 def test():
-    si = snap.Snapper(detectionBoxWidth=1024, detectionBoxHeight=1024, targetFps=3)
+    si = snp.Snapper(detectionBoxWidth=1024, detectionBoxHeight=1024, targetFps=3)
     #print(si.get_device_info_list())
     i = 0
     loop = True
@@ -20,6 +21,7 @@ def test():
             loop = False
 
     si.Quit()
+    print("Capture complete! 👍")
 
 
 if __name__ == "__main__":
