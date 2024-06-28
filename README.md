@@ -1,4 +1,4 @@
-# redSnapper
+# 📷💾🧠 redSnapper
 A rapid screenshot utility using [BetterCam](https://github.com/RootKit-Org/BetterCam) to speed up my generation screenshots to be used in [YOLO](https://www.ultralytics.com/yolo) training data sets
 
 ## Why?
