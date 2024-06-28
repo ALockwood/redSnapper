@@ -1,7 +1,7 @@
 import libs.snapper as snp
 import libs.keymon as km
 from PIL import Image
-import threading
+import concurrent.futures
 import os
 
 # Constants
@@ -12,7 +12,7 @@ CAPTURE_SUB_DIRECTORY = "rs_caps"
 localCam : snp.Snapper = None
 keyWatcher : km.KeyMon = None
 image_counter : int = 0
-
+tpExec = concurrent.futures.ThreadPoolExecutor()
 
 def save_image(arr):
     global image_counter
@@ -32,9 +32,10 @@ def stop_capture():
 
 # Cleanup & exit code
 def exit():
-    global image_counter
+    global image_counter, tpExec
     keyWatcher.stop()
     localCam.Quit()
+    tpExec.shutdown(wait=True)
     print(f"Capture operation complete with {image_counter} images saved! 👍🚀")
 
 # Check for subdirectory in current dir and create if it doesn't exist
@@ -44,7 +45,7 @@ def mk_subdir():
     print(f"📂  Capture directory: {os.getcwd()}\\{CAPTURE_SUB_DIRECTORY}")
 
 def main():
-    global localCam, keyWatcher
+    global localCam, keyWatcher, tpExec
     localCam = snp.Snapper(detectionBoxWidth=1024, detectionBoxHeight=1024, targetFps=3)
     mk_subdir()
     keyWatcher = km.KeyMon(start_callback=start_capture, stop_callback=stop_capture)
@@ -54,7 +55,7 @@ def main():
         if localCam.saveSnap:
             arr = localCam.snap()
             if arr is not None:
-                threading.Thread(target=save_image, args=(arr,)).start()
+                tpExec.submit(save_image, arr)
     
     # Nothing to do but say goodbye...
     exit()
