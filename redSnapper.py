@@ -26,6 +26,8 @@ def start_capture():
 
 # Should be used as a callback, stops capturing
 def stop_capture():
+    global image_counter
+    print(f"💾  Saved {image_counter} images so far")
     localCam.stop_snapping()
 
 # Cleanup & exit code
@@ -39,6 +41,7 @@ def exit():
 def mk_subdir():
     if not os.path.exists(CAPTURE_SUB_DIRECTORY):
         os.makedirs(CAPTURE_SUB_DIRECTORY)
+    print(f"📂  Capture directory: {os.getcwd()}\\{CAPTURE_SUB_DIRECTORY}")
 
 def main():
     global localCam, keyWatcher
