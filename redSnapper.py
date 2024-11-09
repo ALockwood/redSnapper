@@ -7,7 +7,8 @@ import time
 
 # Constants
 FILENAME_PREFIX = "capture"
-CAPTURE_SUB_DIRECTORY = "rs_caps"
+CAPTURE_SUB_DIRECTORY_PREFIX = "rs_caps"
+CAPTURE_SUB_DIRECTORY = f"{CAPTURE_SUB_DIRECTORY_PREFIX}_{int(time.time())}"
 
 # Globals
 localCam : snp.Snapper = None
