@@ -26,9 +26,17 @@ The basic idea is that the capture class runs on it's own as BetterCam is alread
 I tried to keep things fairly SOLID, so _in theory_ I should be able to reuse the `keymon` and `snapper` classes in future work. 🤷
 
 ## Setup
-1. If not already done, create a virtual env: `python -m venv .venv` 
-1. Activate venv: (Win) `.venv\Scripts\activate`
-1. Install requirements: `pip install -r requirements.txt`
+On Windows, run the batch file or run each step manually
+#### Scripted
+```
+init.bat
+```
+#### Manual
+```
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## Running
 On Windows run: `python redSnapper.py` then use the hotkeys to start/stop/exit
