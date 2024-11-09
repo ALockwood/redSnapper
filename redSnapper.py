@@ -3,6 +3,7 @@ import libs.keymon as km
 from PIL import Image
 import concurrent.futures
 import os
+import time
 
 # Constants
 FILENAME_PREFIX = "capture"
@@ -56,6 +57,8 @@ def main():
             arr = localCam.snap()
             if arr is not None:
                 tpExec.submit(save_image, arr)
+        # Sleep for 100ms to avoid busy loop/resolve keyboard input lag issue
+        time.sleep(0.1)
     
     # Nothing to do but say goodbye...
     exit()
